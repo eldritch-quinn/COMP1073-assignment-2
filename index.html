@@ -2,13 +2,34 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Assignment 2 | © Quinn Faulkner | COMP1073 Client-Side JavaScript</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-	<script src="js/objects.js" defer></script>
+	<title>!! Dungeon Smoothie Maker !! | Assignment 2 | © Quinn Faulkner | COMP1073 Client-Side JavaScript</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Viewport Adjustments -->
+	<link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css"> <!-- Normalize -->
+	<script src="js/smoothie.js" defer></script>
 </head>
-
 <body>
-	<h1>Assignment 2</h1>
+	<header> <!-- Header -->
+		<h1>Dungeon Smoothies</h1>
+	</header>
+	<main> <!-- Main -->
+		<!-- Name Input -->		
+		<label for="ordererName">Please enter your name:</label>
+		<input type="text" id="ordererName" name="ordererName">
+
+		<!-- Smoothie HTML Section -->
+		<section>
+			<!-- Smoothie Size Inputs -->
+			<label for="smoothieSize">Select Size:</label>
+			<input type="radio" id="small" name="smoothieSize" value="small">
+			<label for="small">Small</label>
+			<input type="radio" id="medium" name="smoothieSize" value="medium">
+			<label for="medium">Medium</label>
+			<input type="radio" id="large" name="smoothieSize" value="large">
+			<label for="large">Large</label>
+		</section>
+
+		<!-- Submit Button -->
+		<button id="submitButton" type="button">Submit Order</button>
+	</main>
 </body>
 </html>
