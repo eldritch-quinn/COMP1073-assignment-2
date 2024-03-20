@@ -5,6 +5,7 @@
 	<title>!! Dungeon Smoothie Maker !! | Assignment 2 | © Quinn Faulkner | COMP1073 Client-Side JavaScript</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Viewport Adjustments -->
 	<link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css"> <!-- Normalize -->
+	<link rel="stylesheet" href="css/styles.css">
 	<script src="js/smoothie.js" defer></script>
 </head>
 <body>
@@ -12,20 +13,40 @@
 		<h1>Dungeon Smoothies</h1>
 	</header>
 	<main> <!-- Main -->
-		<!-- Name Input -->		
-		<label for="ordererName">Please enter your name:</label>
-		<input type="text" id="ordererName" name="ordererName">
+		<!-- Name Input -->
+		<div>
+			<label for="ordererName">Please enter your name:</label><br>
+			<input type="text" id="ordererName" name="ordererName">
+		</div>
 
 		<!-- Smoothie HTML Section -->
 		<section>
 			<!-- Smoothie Size Inputs -->
-			<label for="smoothieSize">Select Size:</label>
-			<input type="radio" id="small" name="smoothieSize" value="small">
-			<label for="small">Small</label>
-			<input type="radio" id="medium" name="smoothieSize" value="medium">
-			<label for="medium">Medium</label>
-			<input type="radio" id="large" name="smoothieSize" value="large">
-			<label for="large">Large</label>
+			<label for="smoothieSize">Select Size:</label><br>
+			<input type="range" id="smoothieSize" name="smoothieSize" min="0" max="4">
+			
+
+			<!-- Smoothie Flavor Inputs -->
+			<section>
+				
+				<input type="checkbox" id="kale" name="ingredient" value="kale">
+				<label for="kale">Kale</label>
+				
+				<input type="checkbox" id="banana" name="ingredient" value="banana">
+				<label for="banana">Banana</label>
+				
+				<input type="checkbox" id="mango" name="ingredient" value="mango">
+				<label for="mango">Mango</label>
+				
+				<input type="checkbox" id="pineapple" name="ingredient" value="pineapple">
+				<label for="pineapple">Pineapple</label>
+				
+				<input type="checkbox" id="spinach" name="ingredient" value="spinach">
+				<label for="spinach">Spinach</label>
+
+				<input type="checkbox" id="strawberries" name="ingredient" value="strawberries">
+				<label for="strawberries">Strawberries</label>
+			</section>
 		</section>
 
 		<!-- Submit Button -->

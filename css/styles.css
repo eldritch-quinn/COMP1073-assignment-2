@@ -1,0 +1,9 @@
+main {
+  margin: 2rem;
+}
+
+main > section {
+  display: block;
+  border: 1px black solid;
+  margin: 2rem;
+}
