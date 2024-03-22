@@ -1,6 +1,100 @@
+// an extendable template for a box
+
+
+* 
+  font-family: InterVariable
+  box-sizing: border-box
+
+%box
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+  border-radius: 10px
+
+%center
+  justify-content: center
+  align-items: center
+  display: flex
+
+header
+  @extend %center
+  width: 100%
+  padding: 1rem
+  h1
+    width: min-content
+
 main
-    margin: 2rem
-main > section
-    display: block
-    border: 1px black solid
-    margin: 2rem
+  height: 100%
+  display: grid
+  grid-template-columns: 1fr 2fr
+  grid-template-rows: 16rem 32rem
+  grid-template-areas: 'o d' 'f f'
+
+  margin: 2rem
+  overflow: hidden
+  @extend %box
+#order
+  padding: 2rem
+  grid-area: o
+
+
+#display
+  @extend %box
+  grid-area: d
+  padding: 2rem
+  h2::before
+    content: "¤ "
+
+
+#order, #display
+  h2
+    margin-top: 0
+
+#flavorSection
+  grid-area: f
+  h2
+    margin-left: 1rem
+
+#flavors
+  display: flex
+  flex: 1
+  flex-wrap: wrap
+  gap: 10px
+  padding: 1rem
+  
+  a
+    
+    @extend %box
+    cursor: pointer
+    width: 30%
+    height: 8rem
+    top: 0px
+    overflow: hidden
+
+    transition: all .1s ease-in-out
+
+    position: relative
+
+    border-bottom-width: 4px
+    
+    & *
+      user-select: none
+
+    h4
+      margin: 0
+
+    p 
+      position: relative
+      left: 0
+      transition: all .3s ease-in-out
+      opacity: 0%
+    
+    &:hover
+
+      border-bottom-width: 1rem
+      top: -10px
+      box-shadow: rgba(0, 0, 0, 0.24) 3px 6px 8px
+
+      p
+        left: 3px
+        opacity: 100%

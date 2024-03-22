@@ -1,9 +1,102 @@
-main {
-  margin: 2rem;
+@charset "UTF-8";
+* {
+  font-family: InterVariable;
+  box-sizing: border-box;
 }
 
-main > section {
-  display: block;
-  border: 1px black solid;
+#flavors a, #display, main {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+  border-radius: 10px;
+}
+
+header {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+header {
+  width: 100%;
+  padding: 1rem;
+}
+header h1 {
+  width: -moz-min-content;
+  width: min-content;
+}
+
+main {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 16rem 32rem;
+  grid-template-areas: "o d" "f f";
   margin: 2rem;
+  overflow: hidden;
+}
+
+#order {
+  padding: 2rem;
+  grid-area: o;
+}
+
+#display {
+  grid-area: d;
+  padding: 2rem;
+}
+#display h2::before {
+  content: "¤ ";
+}
+
+#order h2, #display h2 {
+  margin-top: 0;
+}
+
+#flavorSection {
+  grid-area: f;
+}
+#flavorSection h2 {
+  margin-left: 1rem;
+}
+
+#flavors {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 1rem;
+}
+#flavors a {
+  cursor: pointer;
+  width: 30%;
+  height: 8rem;
+  top: 0px;
+  overflow: hidden;
+  transition: all 0.1s ease-in-out;
+  position: relative;
+  border-bottom-width: 4px;
+}
+#flavors a * {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+#flavors a h4 {
+  margin: 0;
+}
+#flavors a p {
+  position: relative;
+  left: 0;
+  transition: all 0.3s ease-in-out;
+  opacity: 0%;
+}
+#flavors a:hover {
+  border-bottom-width: 1rem;
+  top: -10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 3px 6px 8px;
+}
+#flavors a:hover p {
+  left: 3px;
+  opacity: 100%;
 }
