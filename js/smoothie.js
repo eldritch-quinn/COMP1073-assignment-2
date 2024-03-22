@@ -4,113 +4,7 @@
 
 */
 
-// Class set-up
-class Flavor {
-  /* 
-      :: name = String ::
-          
-          a display name for the flavor
-  
-      
-      :: id = String ::
-          
-          the identifier for the id
-
-      :: color = String ::
-          
-          the color code
-  
-      :: calories = Number ::
-          
-          the calorie count for the flavor
-  
-      :: desc = String ::
-          
-          a small descritor for the flavor
-  
-      :: ingredients = String [...] ::
-  
-          this parameter is an array of ingredients
-      */
-  /* Example Flavor 
-      {
-          name: "Perfect Peach Mango",
-          id: "perfectPeachMango",
-          calories: 350,
-          desc: "sorbet",
-          ingredients: ["Peach Purée", "Mango Chunks", "Clover Honey"],
-      },
-     
-     */
-  constructor(prop) {
-    this.name = prop["name"];
-    this.id = prop["id"];
-    this.calories = prop["calories"];
-    this.color = prop["color"];
-    this.desc = prop["desc"];
-    this.ingredients = prop["ingredients"];
-  }
-}
-
-class Smoothie {
-  /*==========================================================================
-        :: size = Number ::
-            
-            this parameter is a number that correlates to a specific size
-
-            0 : Kiddie
-            1 : Small
-            2 : Medium
-            3 : Large
-            4 : Double-Gulp
-            
-        :: ingredients = Ingredient [...] ::
-
-            this parameter is an array of Ingredient objects ( detailed above!! ^^ )
-
-        :: name = String ::
-
-        this parameter is a string containing the name of the person who ordered
-
-    ==========================================================================*/
-
-  constructor(size, ingredients, orderer) {
-    switch (size) {
-      case 0:
-        this.size = "Kiddie";
-        break;
-      case 1:
-        this.size = "Small";
-        break;
-      case 2:
-        this.size = "Medium";
-        break;
-      case 3:
-        this.size = "Large";
-        break;
-      case 4:
-        this.size = "Double-Gulp";
-        break;
-      default:
-        break;
-    }
-
-    this.ingredients = ingredients;
-
-    this.orderer = orderer;
-  }
-
-  rollcall() {
-    alert(`Order up!\n We have a ${this.ingredients.join()}.`);
-  }
-
-  debugLog() {
-    Object.entries(this).forEach(([k, v]) => {
-      console.log(`${k}: ${v}`);
-    });
-  }
-}
-
+// template for flavors & stuff
 const props = [
   {
     name: "Perfect Peach Mango",
@@ -202,68 +96,170 @@ const props = [
   },
 ];
 
-const Flavors = [];
-
 // Constant Variable Set-up
-const ordererName = document.querySelector("#ordererName");
-const smoothieFlavors = document.querySelector("#flavors");
-const smoothieSize = document.querySelector("#smoothieSize");
-const submitButton = document.querySelector("#submitButton");
 
+// elements that the user interacts with..
+const elements = {
+  Name: document.querySelector("#ordererName"),
+  Flavors: document.querySelector("#flavors"),
+  Size: document.querySelector("#smoothieSize"),
+  Submit: document.querySelector("#submitButton"),
+};
+
+// capture the display elements
 const display = {
-  header : document.querySelector("#display h2"),
+  info: document.querySelector('#display h4'),
+  header: document.querySelector("#display h2"),
   desc: document.querySelector("#display #desc"),
   ingr: document.querySelector("#display #ingr"),
-  parent: document.querySelector("#display")
+  parent: document.querySelector("#display"),
+};
+
+// Class set-up
+class Flavor {
+  /* 
+      :: name = String ::
+          
+          a display name for the flavor
+  
+      
+      :: id = String ::
+          
+          the identifier for the id
+
+      :: color = String ::
+          
+          the color code
+  
+      :: calories = Number ::
+          
+          the calorie count for the flavor
+  
+      :: desc = String ::
+          
+          a small descritor for the flavor
+  
+      :: ingredients = String [...] ::
+  
+          this parameter is an array of ingredients
+      */
+  /* Example Flavor 
+      {
+          name: "Perfect Peach Mango",
+          id: "perfectPeachMango",
+          calories: 350,
+          desc: "sorbet",
+          ingredients: ["Peach Purée", "Mango Chunks", "Clover Honey"],
+      },
+     
+     */
+  constructor(prop) {
+    this.name = prop["name"];
+    this.id = prop["id"];
+    this.calories = prop["calories"];
+    this.color = prop["color"];
+    this.desc = prop["desc"];
+    this.ingredients = prop["ingredients"];
+  }
 }
 
+let ordererName = '';
+let selectedFlavor = null;
+const Flavors = [];
+
+// a fcuntion that displays a flavor to the display panel
 function displayFlavor(inputFlavor) {
-  display.header.textContent = inputFlavor.name
-  display.desc.textContent = inputFlavor.desc
+  // Rewrite the display's content
+  display.header.textContent = inputFlavor.name;
+  display.desc.textContent = inputFlavor.desc;
+
   // Remove the inner HTML of the ul, effectively removing all items
-  display.ingr.innerHTML = '';
+  display.ingr.innerHTML = "";
 
-  display.parent.style.borderTopColor = inputFlavor.color
+  // set the top border color to the flavor's color
+  display.parent.style.borderTopColor = inputFlavor.color;
 
-  
-  inputFlavor.ingredients.forEach(i => {
-    let newListItem  = document.createElement('li')
-    let newP = document.createElement('p');
-    newP.textContent = i
+  // for each of the ingredients..
+  inputFlavor.ingredients.forEach((i) => {
+    // create new list item & p
+    let newListItem = document.createElement("li");
+    let newP = document.createElement("p");
 
-    
-    
+    // set the text content of the new p to the ingredient
+    newP.textContent = i;
+
+    // append the text to our new tags
     newListItem.appendChild(newP);
     display.ingr.appendChild(newListItem);
-
   });
+
+  // set the selected flavor for ordering to the input one
+  selectedFlavor = inputFlavor;
 }
 
-
+// a function that builds all flavors and inputs them
 function buildFlavors() {
+  // for each flavor in my prop object..
   props.forEach((flavorObj) => {
+    // create a new Flavor object from the prop
     let newFlavor = new Flavor(flavorObj);
+
+    // push the newly created flavor to the global array
     Flavors.push(newFlavor);
 
-    const flavorHTML = `<div><h4>${newFlavor["name"]}</h4><p>${newFlavor['desc']}</p></div>`;
-  
+    // define the inner html for the card and inject the variables
+    const flavorHTML = `<div><h4>${newFlavor["name"]}</h4><p>${newFlavor["desc"]}</p></div>`;
+
+    // create a new anchor element
     const newCard = document.createElement("a");
 
-    newCard.addEventListener('click', () => {
+    // add a listener to listen for the anchor element to be clicked on
+    newCard.addEventListener("click", () => {
+      // run the display function with the newly created flavor
       displayFlavor(newFlavor);
-    })
-      
-    newCard.style.borderBottomColor = newFlavor.color
+    });
+
+    // set the border to the new color
+    newCard.style.borderBottomColor = newFlavor.color;
     newCard.innerHTML = flavorHTML;
 
-    smoothieFlavors.appendChild(newCard);
-
+    // add the flavor card to the flavor section
+    elements["Flavors"].appendChild(newCard);
   });
-  
+
+  // display a random flavor in the displayer
   displayFlavor(Flavors[Math.floor(Math.random() * Flavors.length)]);
-  
 }
 
-
-
 buildFlavors();
+
+elements.Submit.addEventListener('click', () => {
+
+  if (!elements.Name.value) return;
+
+  let sizeDesc = '';
+  console.log(elements.Size.value)
+  switch (elements.Size.value) {
+    case '0':
+      sizeDesc = "kiddie";
+      break;
+    case '1':
+      sizeDesc = "small";
+      break;
+    case '2':
+      sizeDesc = "medium";
+      break;
+    case '3':
+      sizeDesc = "large";
+      break;
+    case '4':
+      sizeDesc = "double-gulp";
+      break;
+    default:
+      sizeDesc = "medium";
+      break;
+  }
+
+  display['info'].textContent = `${elements.Name.value}'s ${sizeDesc}`;
+  display['info'].style.opacity = 100;
+});

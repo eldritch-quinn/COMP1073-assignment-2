@@ -1,16 +1,15 @@
 // an extendable template for a box
 
-
-html 
+html
   font-family: InterVariable
   box-sizing: border-box
 
 *, *:before, *:after
   box-sizing: inherit
 
-
 %box
-  border: 1px solid #ccc
+  //border: 1px solid #ccc
+  outline: 1px solid #ccc
   padding: 10px
   color: #333
   border-radius: 10px
@@ -19,6 +18,8 @@ html
   justify-content: center
   align-items: center
   display: flex
+
+
 
 header
   @extend %center
@@ -37,47 +38,46 @@ main
   margin: 2rem
   overflow: hidden
   @extend %box
+
 #order
   padding: 2rem
   grid-area: o
 
-
 #display
   @extend %box
-  grid-area: d
-  padding: 2rem
-  overflow: none 
+  border-top: 0px solid black
+  transition: all .3s
 
-  border-top-width: 1rem 
+  grid-area: d
+  padding: 0 2rem 2rem 2rem
+  
+  overflow: none
+
+  border-top-width: 1rem
 
   h2, ul, li, p
     margin: 0
-
-  h2::before
-    content: "¤ "
-
-  h5
-    margin-bottom: .5rem
   
+  h4
+    opacity: 0
+    margin-bottom: .2rem
+    font-weight: 500
+
+  h5, h2
+    margin-bottom: 1rem
+
   ul
+    min-width: max-content
     display: flex
     list-style: none
     padding-left: 1rem
-    
-    
     li
       margin: 0.5em 0.2em
-      outline: 1px #ccc solid
+      border: 1px #ccc solid
       font-size: .7em
       padding: 0.5em
-      
+
       border-radius: 8px
-      
-      p::before
-        content: ''
-    
-
-
 
 #order, #display
   h2
@@ -94,34 +94,40 @@ main
   flex-wrap: wrap
   gap: 10px
   padding: 1rem
-  
+
   a
-    
+    // extend the box styles to the anchor
     @extend %box
-    cursor: pointer
+
     width: 30%
     height: 8rem
     top: 0px
-    overflow: hidden
 
     transition: all .1s ease-in-out
 
     position: relative
 
     border-bottom-width: 4px
-    
+
+    border-bottom: 0px solid black
+
+    // set the cursor to pointer to convey interactivity
+    cursor: pointer
+
+    // hide overflow
+    overflow: hidden
     & *
       user-select: none
 
     h4
       margin: 0
 
-    p 
+    p
       position: relative
       left: 0
       transition: all .3s ease-in-out
       opacity: 0%
-    
+
     &:hover
 
       border-bottom-width: 1rem
