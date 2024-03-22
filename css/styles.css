@@ -1,7 +1,11 @@
 @charset "UTF-8";
-* {
+html {
   font-family: InterVariable;
   box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 #flavors a, #display, main {
@@ -44,9 +48,32 @@ main {
 #display {
   grid-area: d;
   padding: 2rem;
+  overflow: none;
+  border-top-width: 1rem;
+}
+#display h2, #display ul, #display li, #display p {
+  margin: 0;
 }
 #display h2::before {
   content: "¤ ";
+}
+#display h5 {
+  margin-bottom: 0.5rem;
+}
+#display ul {
+  display: flex;
+  list-style: none;
+  padding-left: 1rem;
+}
+#display ul li {
+  margin: 0.5em 0.2em;
+  outline: 1px #ccc solid;
+  font-size: 0.7em;
+  padding: 0.5em;
+  border-radius: 8px;
+}
+#display ul li p::before {
+  content: "";
 }
 
 #order h2, #display h2 {

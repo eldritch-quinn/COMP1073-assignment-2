@@ -1,9 +1,13 @@
 // an extendable template for a box
 
 
-* 
+html 
   font-family: InterVariable
   box-sizing: border-box
+
+*, *:before, *:after
+  box-sizing: inherit
+
 
 %box
   border: 1px solid #ccc
@@ -42,8 +46,37 @@ main
   @extend %box
   grid-area: d
   padding: 2rem
+  overflow: none 
+
+  border-top-width: 1rem 
+
+  h2, ul, li, p
+    margin: 0
+
   h2::before
     content: "¤ "
+
+  h5
+    margin-bottom: .5rem
+  
+  ul
+    display: flex
+    list-style: none
+    padding-left: 1rem
+    
+    
+    li
+      margin: 0.5em 0.2em
+      outline: 1px #ccc solid
+      font-size: .7em
+      padding: 0.5em
+      
+      border-radius: 8px
+      
+      p::before
+        content: ''
+    
+
 
 
 #order, #display

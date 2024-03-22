@@ -213,35 +213,44 @@ const submitButton = document.querySelector("#submitButton");
 const display = {
   header : document.querySelector("#display h2"),
   desc: document.querySelector("#display #desc"),
-  ingr: document.querySelector("#display #ingr")
+  ingr: document.querySelector("#display #ingr"),
+  parent: document.querySelector("#display")
 }
 
+function displayFlavor(inputFlavor) {
+  display.header.textContent = inputFlavor.name
+  display.desc.textContent = inputFlavor.desc
+  // Remove the inner HTML of the ul, effectively removing all items
+  display.ingr.innerHTML = '';
+
+  display.parent.style.borderTopColor = inputFlavor.color
+
+  
+  inputFlavor.ingredients.forEach(i => {
+    let newListItem  = document.createElement('li')
+    let newP = document.createElement('p');
+    newP.textContent = i
+
+    
+    
+    newListItem.appendChild(newP);
+    display.ingr.appendChild(newListItem);
+
+  });
+}
 
 
 function buildFlavors() {
   props.forEach((flavorObj) => {
     let newFlavor = new Flavor(flavorObj);
-
-    console.log(newFlavor);
+    Flavors.push(newFlavor);
 
     const flavorHTML = `<div><h4>${newFlavor["name"]}</h4><p>${newFlavor['desc']}</p></div>`;
   
     const newCard = document.createElement("a");
 
     newCard.addEventListener('click', () => {
-      display.header.textContent = newFlavor.name
-      display.desc.textContent = newFlavor.desc
-      
-      newFlavor.ingredients.forEach(i => {
-        let newListItem  = document.createElement('li')
-        let newP = document.createElement('p');
-        newP.textContent = flav
-        
-
-      });
-
-
-      display.ingredients
+      displayFlavor(newFlavor);
     })
       
     newCard.style.borderBottomColor = newFlavor.color
@@ -250,6 +259,8 @@ function buildFlavors() {
     smoothieFlavors.appendChild(newCard);
 
   });
+  
+  displayFlavor(Flavors[Math.floor(Math.random() * Flavors.length)]);
   
 }
 
