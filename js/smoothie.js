@@ -4,6 +4,8 @@
 
 */
 
+// Constant Variable Set-up
+
 // template for flavors & stuff
 const props = [
   {
@@ -96,8 +98,6 @@ const props = [
   },
 ];
 
-// Constant Variable Set-up
-
 // elements that the user interacts with..
 const elements = {
   Name: document.querySelector("#ordererName"),
@@ -115,7 +115,7 @@ const display = {
   parent: document.querySelector("#display"),
 };
 
-// Class set-up
+// class set-up
 class Flavor {
   /* 
       :: name = String ::
@@ -163,12 +163,15 @@ class Flavor {
   }
 }
 
-let ordererName = '';
+// create a variable to store flavor that they choose
 let selectedFlavor = null;
+
+// create an array to store the flavor objects
 const Flavors = [];
 
-// a fcuntion that displays a flavor to the display panel
+// a function that displays a flavor to the display panel
 function displayFlavor(inputFlavor) {
+  
   // Rewrite the display's content
   display.header.textContent = inputFlavor.name;
   display.desc.textContent = inputFlavor.desc;
@@ -181,7 +184,8 @@ function displayFlavor(inputFlavor) {
 
   // for each of the ingredients..
   inputFlavor.ingredients.forEach((i) => {
-    // create new list item & p
+    
+    // create new elements
     let newListItem = document.createElement("li");
     let newP = document.createElement("p");
 
@@ -190,6 +194,8 @@ function displayFlavor(inputFlavor) {
 
     // append the text to our new tags
     newListItem.appendChild(newP);
+
+    // append the tag into the display
     display.ingr.appendChild(newListItem);
   });
 
@@ -199,8 +205,10 @@ function displayFlavor(inputFlavor) {
 
 // a function that builds all flavors and inputs them
 function buildFlavors() {
+
   // for each flavor in my prop object..
   props.forEach((flavorObj) => {
+    
     // create a new Flavor object from the prop
     let newFlavor = new Flavor(flavorObj);
 
@@ -215,12 +223,15 @@ function buildFlavors() {
 
     // add a listener to listen for the anchor element to be clicked on
     newCard.addEventListener("click", () => {
+    
       // run the display function with the newly created flavor
       displayFlavor(newFlavor);
     });
 
     // set the border to the new color
     newCard.style.borderBottomColor = newFlavor.color;
+    
+    // append the content into the card
     newCard.innerHTML = flavorHTML;
 
     // add the flavor card to the flavor section
@@ -228,18 +239,26 @@ function buildFlavors() {
   });
 
   // display a random flavor in the displayer
-  displayFlavor(Flavors[Math.floor(Math.random() * Flavors.length)]);
+  displayFlavor(Flavors[
+    
+    // create a random index
+    Math.floor(Math.random() * Flavors.length)
+  ]);
 }
 
-buildFlavors();
-
+// create a handler for the click 
 elements.Submit.addEventListener('click', () => {
-
+  
+  // if the name value isn't there do nothing
   if (!elements.Name.value) return;
-
+  
+  // define a variable to hold the switch case
   let sizeDesc = '';
-  console.log(elements.Size.value)
+
+  // run a switch on the size slider
   switch (elements.Size.value) {
+
+    // define the size cases
     case '0':
       sizeDesc = "kiddie";
       break;
@@ -255,11 +274,17 @@ elements.Submit.addEventListener('click', () => {
     case '4':
       sizeDesc = "double-gulp";
       break;
-    default:
+    default: // default case
       sizeDesc = "medium";
       break;
   }
-
+  
+  // set the text content for the info
   display['info'].textContent = `${elements.Name.value}'s ${sizeDesc}`;
+  
+  // set the information to visible
   display['info'].style.opacity = 100;
 });
+
+// run the main function to populate the flavor card section
+buildFlavors();
